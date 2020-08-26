@@ -3,24 +3,27 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <ion-list-header>NewSignal-tv</ion-list-header>
+          <ion-note>social@newignal.it</ion-note>
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+          <!-- alla Home-->
+          <ion-menu-toggle >
+            <ion-item  routerDirection="root" [routerLink]="'/folder/Inbox'" lines="none" detail="false">
+              <ion-icon name="home-outline"></ion-icon>
+              <ion-label>Home</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
+          <hr>
+          <!-- playlist recuperata da youtube -->
+          <ion-list-header>I più Visti</ion-list-header>
+          <hr>
+          <ion-menu-toggle auto-hide="false" *ngFor="let item of playList; let i = index">
+          <!-- <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="'folder/'+[item.id]" > --> 
+            <ion-item (click)="sendData(item.id, item.snippet.title)" >
+              <img src="{{ item.snippet.thumbnails.default.url }}" width='50' height="auto"> 
+               <ion-label>{{ item.snippet.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
